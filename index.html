@@ -1,0 +1,1567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DYD Intelligence — Modular AI Platform</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <style>
+    :root {
+      --white: #ffffff;
+      --off-white: #F9F9FB;
+      --dark: #09090F;
+      --dark-2: #111118;
+      --gray-light: #F3F3F6;
+      --gray-mid: #E4E4EF;
+      --text-dark: #0D0D1A;
+      --text-mid: #4B4B6A;
+      --text-light: #8888AA;
+      --violet: #7C3AED;
+      --violet-light: #9F6FFF;
+      --pink: #EC4899;
+      --cyan: #06B6D4;
+      --green: #10B981;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--white);
+      color: var(--text-dark);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5 {
+      font-family: 'Space Grotesk', sans-serif;
+      letter-spacing: -0.03em;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+    .nav-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--text-dark);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--violet); }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-mid);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .nav-links a:hover { color: var(--text-dark); }
+    .btn-primary {
+      background: var(--dark);
+      color: #fff;
+      border: none;
+      padding: 0.6rem 1.4rem;
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.18), 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .btn-primary:hover {
+      background: var(--violet);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(124,58,237,0.35), 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .btn-primary:active { transform: translateY(0); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      padding-top: 70px;
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+    .hero-blob {
+      position: absolute;
+      top: -120px;
+      left: -180px;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, rgba(124,58,237,0.18) 0%, rgba(236,72,153,0.1) 50%, transparent 70%);
+      filter: blur(60px);
+      pointer-events: none;
+    }
+    .hero-blob-2 {
+      position: absolute;
+      top: 20%;
+      right: -100px;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(6,182,212,0.1) 0%, transparent 70%);
+      filter: blur(40px);
+      pointer-events: none;
+    }
+    .hero-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 5rem 2rem 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(124,58,237,0.08);
+      border: 1px solid rgba(124,58,237,0.2);
+      border-radius: 100px;
+      padding: 0.35rem 1rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--violet);
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .hero-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--violet);
+      animation: pulse-dot 2s infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+    .hero-title {
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      color: var(--text-dark);
+      letter-spacing: -0.04em;
+      margin-bottom: 0.5rem;
+    }
+    .hero-title-gradient {
+      background: linear-gradient(135deg, var(--violet) 0%, var(--pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      color: var(--text-dark);
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+    }
+    .hero-desc {
+      font-size: 1rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--text-dark);
+      border: 1.5px solid rgba(0,0,0,0.15);
+      padding: 0.6rem 1.4rem;
+      border-radius: 100px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      font-family: 'Space Grotesk', sans-serif;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+    .btn-outline:hover {
+      border-color: var(--violet);
+      color: var(--violet);
+      background: rgba(124,58,237,0.04);
+    }
+    .hero-stats {
+      display: flex;
+      gap: 2.5rem;
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--gray-mid);
+    }
+    .hero-stat-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      letter-spacing: -0.03em;
+    }
+    .hero-stat-label {
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-top: 0.2rem;
+    }
+
+    /* PHONE MOCKUP */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .phone-wrap {
+      position: relative;
+      width: 280px;
+    }
+    .phone-shell {
+      background: var(--dark);
+      border-radius: 44px;
+      padding: 12px;
+      box-shadow:
+        0 40px 80px rgba(0,0,0,0.25),
+        0 20px 40px rgba(0,0,0,0.15),
+        0 0 0 1px rgba(255,255,255,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.1);
+      position: relative;
+      z-index: 2;
+    }
+    .phone-notch {
+      width: 80px;
+      height: 18px;
+      background: #0d0d1a;
+      border-radius: 0 0 12px 12px;
+      flex-shrink: 0;
+    }
+    .floating-card {
+      position: absolute;
+      background: #fff;
+      border-radius: 16px;
+      padding: 0.8rem 1rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12), 0 2px 8px rgba(0,0,0,0.06);
+      z-index: 3;
+    }
+    .float-1 {
+      top: 10%;
+      right: -80px;
+      min-width: 140px;
+    }
+    .float-2 {
+      bottom: 15%;
+      left: -80px;
+      min-width: 130px;
+    }
+    .floating-card-label {
+      font-size: 0.65rem;
+      color: var(--text-light);
+      margin-bottom: 0.25rem;
+    }
+    .floating-card-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-dark);
+    }
+    .floating-card-tag {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: var(--green);
+      background: rgba(16,185,129,0.1);
+      border-radius: 100px;
+      padding: 0.15rem 0.5rem;
+      margin-top: 0.2rem;
+    }
+
+    /* SECTION LAYOUT */
+    .section {
+      padding: 6rem 2rem;
+    }
+    .section-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--text-dark);
+    }
+
+    /* CLIENTS / LOGOS */
+    .clients-bar {
+      background: var(--gray-light);
+      padding: 1.5rem 2rem;
+      overflow: hidden;
+    }
+    .clients-track {
+      display: flex;
+      gap: 3.5rem;
+      align-items: center;
+      animation: scroll-logos 30s linear infinite;
+      width: max-content;
+    }
+    @keyframes scroll-logos {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+    .client-logo {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: rgba(0,0,0,0.25);
+      white-space: nowrap;
+      letter-spacing: -0.02em;
+    }
+
+    /* SHOWCASE CARDS */
+    .showcase-grid {
+      display: flex;
+      gap: 1.25rem;
+      overflow-x: auto;
+      padding-bottom: 1rem;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .showcase-grid::-webkit-scrollbar { display: none; }
+    .showcase-card {
+      flex-shrink: 0;
+      width: 220px;
+      border-radius: 20px;
+      overflow: hidden;
+      background: var(--gray-light);
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+      position: relative;
+    }
+    .showcase-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.12), 0 8px 20px rgba(0,0,0,0.07);
+    }
+    .showcase-card:active { transform: translateY(-2px) scale(1.01); }
+    .showcase-card-img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+    }
+    .showcase-card-img-placeholder {
+      width: 100%;
+      aspect-ratio: 3/4;
+      position: relative;
+      overflow: hidden;
+    }
+    .showcase-card-overlay {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.5rem 1rem 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+    }
+    .showcase-card-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .showcase-card-cat {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.65);
+      margin-top: 0.2rem;
+    }
+    .showcase-card-tag {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 600;
+      background: rgba(124,58,237,0.85);
+      color: #fff;
+      border-radius: 100px;
+      padding: 0.2rem 0.6rem;
+      margin-top: 0.5rem;
+    }
+
+    /* DARK SECTION */
+    .dark-section {
+      background: var(--dark);
+      color: #fff;
+      padding: 7rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .dark-section-bg-glow {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 600px 400px at 80% 50%, rgba(124,58,237,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 400px 300px at 20% 80%, rgba(236,72,153,0.08) 0%, transparent 70%);
+    }
+    .dark-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .dark-bracket {
+      display: inline-block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--violet-light);
+      border: 1px solid rgba(124,58,237,0.4);
+      padding: 0.3rem 0.8rem;
+      border-radius: 6px;
+      margin-bottom: 1.5rem;
+    }
+    .dark-title {
+      font-size: clamp(3rem, 5.5vw, 5rem);
+      font-weight: 800;
+      line-height: 0.95;
+      letter-spacing: -0.05em;
+      margin-bottom: 1.5rem;
+    }
+    .dark-title span {
+      background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.5) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .dark-title .accent {
+      background: linear-gradient(135deg, var(--violet-light), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .dark-desc {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.75;
+      max-width: 440px;
+      margin-bottom: 2rem;
+    }
+    .dark-features {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .dark-feature-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.9rem;
+      color: rgba(255,255,255,0.75);
+    }
+    .dark-feature-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--violet-light);
+      flex-shrink: 0;
+    }
+    .dark-phones {
+      position: relative;
+      height: 480px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .dark-phone-1 {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%) rotate(-8deg);
+      width: 200px;
+      z-index: 1;
+    }
+    .dark-phone-2 {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%) rotate(8deg);
+      width: 200px;
+      z-index: 1;
+    }
+    .dark-phone-3 {
+      position: relative;
+      width: 220px;
+      z-index: 2;
+    }
+    .mini-phone {
+      background: #1a1a2e;
+      border-radius: 32px;
+      padding: 8px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.05);
+    }
+    .mini-screen {
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 9/19.5;
+    }
+
+    /* PORTFOLIO */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 1rem;
+    }
+    .portfolio-item {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      background: var(--gray-light);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    .portfolio-item:hover { transform: scale(1.015); }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
+    .portfolio-item-tall { grid-row: span 2; }
+    .portfolio-img {
+      width: 100%;
+      height: 100%;
+      min-height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+    .portfolio-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(124,58,237,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .portfolio-overlay-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .portfolio-info {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      padding: 1.5rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 100%);
+    }
+    .portfolio-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .portfolio-cat {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.6);
+      margin-top: 0.2rem;
+    }
+
+    /* NUMBERS */
+    .numbers-section {
+      background: var(--off-white);
+      padding: 7rem 2rem;
+    }
+    .numbers-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .numbers-title {
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      color: var(--text-dark);
+      margin-bottom: 1.5rem;
+    }
+    .numbers-title em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--violet), var(--pink));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .numbers-desc {
+      font-size: 1rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      max-width: 440px;
+      margin-bottom: 2rem;
+    }
+    .numbers-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+    .number-item {
+      padding: 1.75rem;
+      background: #fff;
+      border-radius: 20px;
+      border: 1px solid var(--gray-mid);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.03);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+    }
+    .number-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.09), 0 4px 12px rgba(0,0,0,0.05);
+    }
+    .number-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.05em;
+      color: var(--text-dark);
+      line-height: 1;
+    }
+    .number-val sup {
+      font-size: 1.2rem;
+      vertical-align: super;
+    }
+    .number-val .accent { color: var(--violet); }
+    .number-label {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      margin-top: 0.5rem;
+      line-height: 1.5;
+    }
+
+    /* TESTIMONIAL */
+    .testimonial-section {
+      background: var(--dark-2);
+      padding: 7rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .testimonial-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(ellipse 700px 500px at 50% 50%, rgba(124,58,237,0.1) 0%, transparent 70%);
+    }
+    .testimonial-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+    .quote-mark {
+      font-size: 6rem;
+      line-height: 0.6;
+      color: var(--violet);
+      font-family: Georgia, serif;
+      margin-bottom: 2rem;
+      display: block;
+      opacity: 0.6;
+    }
+    .testimonial-text {
+      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 500;
+      color: rgba(255,255,255,0.9);
+      line-height: 1.6;
+      letter-spacing: -0.02em;
+      margin-bottom: 2.5rem;
+    }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .author-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet), var(--pink));
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 2px solid rgba(124,58,237,0.4);
+    }
+    .author-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      text-align: left;
+    }
+    .author-role {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.4);
+      text-align: left;
+    }
+
+    /* CLIENTS LOGOS (bottom of testimonial) */
+    .clients-logos-row {
+      display: flex;
+      gap: 2.5rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+    }
+    .client-logo-item {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: -0.02em;
+      transition: color 0.2s ease;
+    }
+    .client-logo-item:hover { color: rgba(255,255,255,0.5); }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      padding: 4rem 2rem 2rem;
+      border-top: 1px solid rgba(255,255,255,0.05);
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3rem;
+    }
+    .footer-brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -0.04em;
+      margin-bottom: 1rem;
+    }
+    .footer-brand span { color: var(--violet); }
+    .footer-tagline {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.7;
+      max-width: 280px;
+    }
+    .footer-col-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 1.25rem;
+    }
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .footer-links a {
+      font-size: 0.875rem;
+      color: rgba(255,255,255,0.55);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    .footer-links a:hover { color: #fff; }
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.25);
+    }
+
+    /* SERVICES SECTION */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .service-card {
+      padding: 2rem;
+      border-radius: 20px;
+      border: 1px solid var(--gray-mid);
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease, border-color 0.2s ease;
+    }
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(124,58,237,0.1), 0 8px 20px rgba(0,0,0,0.06);
+      border-color: rgba(124,58,237,0.3);
+    }
+    .service-card:active { transform: translateY(-2px); }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--violet), var(--pink));
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+    .service-card:hover::before { opacity: 1; }
+    .service-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1.25rem;
+      font-size: 1.4rem;
+    }
+    .service-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.6rem;
+    }
+    .service-desc {
+      font-size: 0.875rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+    }
+
+    /* PROCESS SECTION */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+      position: relative;
+    }
+    .process-step {
+      text-align: center;
+      position: relative;
+    }
+    .process-num {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet), var(--pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      margin: 0 auto 1.25rem;
+      box-shadow: 0 8px 24px rgba(124,58,237,0.35);
+    }
+    .process-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.5rem;
+    }
+    .process-desc {
+      font-size: 0.82rem;
+      color: var(--text-mid);
+      line-height: 1.65;
+    }
+
+    /* CHAT UI */
+    .phone-screen {
+      border-radius: 34px;
+      overflow: hidden;
+      background: #0d0d1a;
+      aspect-ratio: 9/19.5;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-header {
+      flex-shrink: 0;
+      background: #13132a;
+      border-bottom: 1px solid rgba(124,58,237,0.2);
+      padding: 0 0 0.6rem;
+    }
+    .chat-header-inner {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.75rem 0;
+    }
+    .chat-agent-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet), var(--pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .chat-agent-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .chat-agent-status {
+      font-size: 0.55rem;
+      color: rgba(255,255,255,0.45);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-top: 1px;
+    }
+    .chat-status-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #10B981;
+      display: inline-block;
+      animation: pulse-dot 2s infinite;
+    }
+    .chat-body {
+      flex: 1;
+      overflow: hidden;
+      padding: 0.75rem 0.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .chat-msg {
+      display: flex;
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    .chat-msg.ai { justify-content: flex-start; }
+    .chat-msg.user { justify-content: flex-end; }
+    .chat-typing { justify-content: flex-start; }
+    .chat-bubble {
+      max-width: 80%;
+      padding: 0.45rem 0.6rem;
+      border-radius: 12px;
+      font-size: 0.58rem;
+      line-height: 1.5;
+    }
+    .ai-bubble {
+      background: rgba(124,58,237,0.2);
+      border: 1px solid rgba(124,58,237,0.3);
+      color: rgba(255,255,255,0.9);
+      border-bottom-left-radius: 4px;
+    }
+    .user-bubble {
+      background: linear-gradient(135deg, var(--violet), #5b21b6);
+      color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+    .typing-bubble {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      padding: 0.5rem 0.7rem;
+    }
+    .typing-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.5);
+      animation: typing-bounce 1.2s infinite;
+    }
+    .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typing-bounce {
+      0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+      30% { transform: translateY(-4px); opacity: 1; }
+    }
+    .chat-input-bar {
+      flex-shrink: 0;
+      padding: 0.5rem 0.6rem 0.7rem;
+      background: #13132a;
+      border-top: 1px solid rgba(124,58,237,0.15);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .chat-input-field {
+      flex: 1;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 100px;
+      padding: 0.3rem 0.6rem;
+      font-size: 0.52rem;
+      color: rgba(255,255,255,0.3);
+    }
+    .chat-send-btn {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet), var(--pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    @keyframes msg-in {
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .chat-msg-1 { animation: msg-in 0.35s cubic-bezier(0.34,1.56,0.64,1) 0.6s forwards; }
+    .chat-msg-2 { animation: msg-in 0.35s cubic-bezier(0.34,1.56,0.64,1) 1.6s forwards; }
+    .chat-msg-3 { animation: msg-in 0.35s cubic-bezier(0.34,1.56,0.64,1) 2.8s forwards; }
+    .chat-msg-4 { animation: msg-in 0.35s cubic-bezier(0.34,1.56,0.64,1) 4.0s forwards; }
+    .chat-msg-5 { animation: msg-in 0.35s cubic-bezier(0.34,1.56,0.64,1) 5.2s forwards; }
+    .chat-msg-6 {
+      opacity: 0;
+      transform: translateY(8px);
+      animation: msg-in 0.35s cubic-bezier(0.34,1.56,0.64,1) 6.0s forwards;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-visual { justify-content: flex-start; }
+      .dark-inner { grid-template-columns: 1fr; }
+      .dark-phones { display: none; }
+      .numbers-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .services-grid { grid-template-columns: 1fr 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .hero-inner { padding: 3rem 0 2rem; }
+      .portfolio-grid { grid-template-columns: 1fr; }
+      .portfolio-item-tall { grid-row: span 1; }
+      .float-1, .float-2 { display: none; }
+      .footer-top { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .numbers-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="nav-logo"><span>DYD</span> Intelligence<span style="font-size:0.6em;font-weight:400;color:var(--text-light);margin-left:2px;">AI</span></a>
+      <ul class="nav-links">
+        <li><a href="#overview">Platform</a></li>
+        <li><a href="#services">Capabilities</a></li>
+        <li><a href="#process">Mission</a></li>
+        <li><a href="#about">Industries</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <a href="#contact" class="btn-primary">Get a Demo</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-blob"></div>
+    <div class="hero-blob-2"></div>
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          Modular AI Platform
+        </div>
+        <h1 class="hero-title">
+          YOUR CENTRAL<br>
+          <span class="hero-title-gradient">AI BRAIN</span><br>
+          PLATFORM
+        </h1>
+        <div class="hero-sub">Data driven customer intelligence</div>
+        <p class="hero-desc">
+          DYD Intelligence captures, understands, and transforms customer interactions into structured data, actionable insights, and automated business processes — at scale.
+        </p>
+        <div class="hero-ctas">
+          <a href="#overview" class="btn-primary">Explore the Platform</a>
+          <a href="#services" class="btn-outline">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M10 8l4 4-4 4"/></svg>
+            Our Vision
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <div class="hero-stat-num">Multi</div>
+            <div class="hero-stat-label">Channel Integration</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">AI</div>
+            <div class="hero-stat-label">Powered Understanding</div>
+          </div>
+          <div>
+            <div class="hero-stat-num">360°</div>
+            <div class="hero-stat-label">Business Automation</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="phone-wrap">
+          <div class="phone-shell">
+            <div class="phone-screen">
+              <!-- CHAT HEADER -->
+              <div class="chat-header">
+                <div class="phone-notch" style="margin:0 auto 0;"></div>
+                <div class="chat-header-inner">
+                  <div class="chat-agent-avatar">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+                  </div>
+                  <div>
+                    <div class="chat-agent-name">DYD AI Agent</div>
+                    <div class="chat-agent-status"><span class="chat-status-dot"></span>Online</div>
+                  </div>
+                </div>
+              </div>
+              <!-- CHAT MESSAGES -->
+              <div class="chat-body" id="chatBody">
+                <div class="chat-msg ai chat-msg-1">
+                  <div class="chat-bubble ai-bubble">Hi! How can I help you today? 👋</div>
+                </div>
+                <div class="chat-msg user chat-msg-2">
+                  <div class="chat-bubble user-bubble">I need help tracking my order #4521</div>
+                </div>
+                <div class="chat-msg ai chat-msg-3">
+                  <div class="chat-bubble ai-bubble">Found it! Your order is being processed and ships tomorrow. 📦</div>
+                </div>
+                <div class="chat-msg user chat-msg-4">
+                  <div class="chat-bubble user-bubble">Can I change the delivery address?</div>
+                </div>
+                <div class="chat-msg ai chat-msg-5">
+                  <div class="chat-bubble ai-bubble">Done! Address updated. Confirmation sent to your email. ✅</div>
+                </div>
+                <div class="chat-typing chat-msg-6" id="typingIndicator">
+                  <div class="chat-bubble ai-bubble typing-bubble">
+                    <span class="typing-dot"></span>
+                    <span class="typing-dot"></span>
+                    <span class="typing-dot"></span>
+                  </div>
+                </div>
+              </div>
+              <!-- CHAT INPUT -->
+              <div class="chat-input-bar">
+                <div class="chat-input-field">Type a message…</div>
+                <div class="chat-send-btn">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- DARK: [SMART] DEVELOPMENT -->
+  <section class="dark-section" id="services">
+    <div class="dark-section-bg-glow"></div>
+    <div class="dark-inner">
+      <div>
+        <div class="dark-bracket">[INTELLIGENCE] HUB</div>
+        <h2 class="dark-title">
+          <span>CENTRAL</span><br>
+          <span class="accent">AI</span><br>
+          <span>BRAIN</span>
+        </h2>
+        <p class="dark-desc">
+          DYD Intelligence functions as a central intelligence hub — connecting every channel, understanding every interaction, and driving every decision with AI.
+        </p>
+        <div class="dark-features">
+          <div class="dark-feature-item"><div class="dark-feature-dot"></div>Receives interactions from multiple channels</div>
+          <div class="dark-feature-item"><div class="dark-feature-dot"></div>Understands and processes requests using AI</div>
+          <div class="dark-feature-item"><div class="dark-feature-dot"></div>Captures and structures business data</div>
+          <div class="dark-feature-item"><div class="dark-feature-dot"></div>Executes workflows and automation</div>
+          <div class="dark-feature-item"><div class="dark-feature-dot"></div>Generates insights to support better decisions</div>
+          <div class="dark-feature-item"><div class="dark-feature-dot"></div>Improves efficiency, lead conversion, and CX</div>
+        </div>
+        <div style="margin-top:2.5rem;">
+          <a href="#contact" class="btn-primary" style="background:var(--violet);box-shadow:0 4px 20px rgba(124,58,237,0.4);">Request a Demo</a>
+        </div>
+      </div>
+      <div class="dark-phones">
+        <div class="dark-phone-1">
+          <div class="mini-phone">
+            <div class="mini-screen">
+              <img src="https://placehold.co/200x433/1a1035/7C3AED?text=App+View" alt="app" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+          </div>
+        </div>
+        <div class="dark-phone-3">
+          <div class="mini-phone" style="background:#0d0d1a;">
+            <div class="mini-screen">
+              <img src="https://placehold.co/220x476/0d0d1a/9F6FFF?text=UI+Design" alt="ui" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+          </div>
+        </div>
+        <div class="dark-phone-2">
+          <div class="mini-phone">
+            <div class="mini-screen">
+              <img src="https://placehold.co/200x433/1a0530/EC4899?text=Mobile+UX" alt="ux" style="width:100%;height:100%;object-fit:cover;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services-detail">
+    <div class="section-inner">
+      <div style="text-align:center;max-width:600px;margin:0 auto 0;">
+        <div class="section-label">Platform Capabilities</div>
+        <h2 class="section-title">Intelligent. Scalable.<br>Always Connected.</h2>
+        <p style="font-size:1rem;color:var(--text-mid);line-height:1.75;margin-top:1rem;">
+          The platform connects to multiple communication channels and enables consistent, intelligent customer engagement while improving operational efficiency.
+        </p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon" style="background:rgba(124,58,237,0.1);">🔗</div>
+          <div class="service-title">Multi-Channel Reception</div>
+          <div class="service-desc">Connects to messaging platforms and digital interfaces to receive customer interactions from every touchpoint in real time.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon" style="background:rgba(6,182,212,0.1);">🧠</div>
+          <div class="service-title">AI Understanding</div>
+          <div class="service-desc">Understands and processes requests using advanced AI — extracting intent, context, and meaning from every interaction.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon" style="background:rgba(236,72,153,0.1);">🗂️</div>
+          <div class="service-title">Data Capture & Structure</div>
+          <div class="service-desc">Captures and structures business data automatically — turning unstructured conversations into clean, usable records.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon" style="background:rgba(16,185,129,0.1);">⚙️</div>
+          <div class="service-title">Workflow Automation</div>
+          <div class="service-desc">Executes workflows and automation triggers based on interaction data — reducing manual effort and accelerating processes.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon" style="background:rgba(245,158,11,0.1);">📈</div>
+          <div class="service-title">Insights Generation</div>
+          <div class="service-desc">Generates actionable insights from interaction patterns to support better business decisions across teams.</div>
+        </div>
+        <div class="service-card">
+          <div class="service-icon" style="background:rgba(239,68,68,0.1);">🚀</div>
+          <div class="service-title">Operational Intelligence</div>
+          <div class="service-desc">Improves operational efficiency, increases lead conversion and sales, and enhances customer experience through intelligent automation.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO GRID -->
+  <section class="section" style="background:var(--off-white);">
+    <div class="section-inner">
+      <div style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:2.5rem;flex-wrap:wrap;gap:1rem;">
+        <div>
+          <div class="section-label">Industry Applications</div>
+          <h2 class="section-title">Built for every industry</h2>
+        </div>
+        <a href="#contact" class="btn-primary">See It in Action</a>
+      </div>
+      <div class="portfolio-grid">
+        <div class="portfolio-item portfolio-item-tall">
+          <img src="https://placehold.co/600x760/0f0c29/7C3AED?text=Retail+%26+Commerce" alt="Retail & Commerce" class="portfolio-img" style="min-height:400px;">
+          <div class="portfolio-info">
+            <div class="portfolio-title">Retail & E-Commerce</div>
+            <div class="portfolio-cat">Customer Engagement · Order Automation · CX</div>
+          </div>
+          <div class="portfolio-overlay">
+            <div class="portfolio-overlay-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:1rem;">
+          <div class="portfolio-item">
+            <img src="https://placehold.co/580x360/032940/06B6D4?text=Financial+Services" alt="Financial Services" class="portfolio-img" style="min-height:220px;">
+            <div class="portfolio-info">
+              <div class="portfolio-title">Financial Services</div>
+              <div class="portfolio-cat">Lead Conversion · Client Intelligence · Compliance</div>
+            </div>
+            <div class="portfolio-overlay">
+              <div class="portfolio-overlay-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-item">
+            <img src="https://placehold.co/580x360/1a0d3d/EC4899?text=Healthcare" alt="Healthcare" class="portfolio-img" style="min-height:220px;">
+            <div class="portfolio-info">
+              <div class="portfolio-title">Healthcare</div>
+              <div class="portfolio-cat">Patient Communication · Scheduling · Data Capture</div>
+            </div>
+            <div class="portfolio-overlay">
+              <div class="portfolio-overlay-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS -->
+  <section class="section" id="process">
+    <div class="section-inner">
+      <div style="text-align:center;max-width:600px;margin:0 auto;">
+        <div class="section-label">Our Mission</div>
+        <h2 class="section-title">How DYD Intelligence works</h2>
+      </div>
+      <div class="process-steps">
+        <div class="process-step">
+          <div class="process-num">01</div>
+          <div class="process-title">Receive</div>
+          <div class="process-desc">Interactions arrive from multiple channels — messaging platforms and digital interfaces — into a single intelligence layer.</div>
+        </div>
+        <div class="process-step">
+          <div class="process-num">02</div>
+          <div class="process-title">Understand</div>
+          <div class="process-desc">AI processes each request in real time — extracting intent, context, and structured meaning from every conversation.</div>
+        </div>
+        <div class="process-step">
+          <div class="process-num">03</div>
+          <div class="process-title">Execute</div>
+          <div class="process-desc">Workflows and automations fire automatically — capturing data, triggering actions, and updating business systems.</div>
+        </div>
+        <div class="process-step">
+          <div class="process-num">04</div>
+          <div class="process-title">Optimize</div>
+          <div class="process-desc">Insights surface continuously — improving efficiency, increasing conversions, and elevating the customer experience over time.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUMBERS -->
+  <section class="numbers-section">
+    <div class="numbers-inner">
+      <div>
+        <div class="section-label">Why It Works</div>
+        <h2 class="numbers-title">Numbers don't lie,<br>so we use <em>Data Science</em><br>to drive calculated growth</h2>
+        <p class="numbers-desc">
+          Designed for scalability, DYD Intelligence supports organizations across industries seeking to modernize operations, improve responsiveness, and unlock the value of their customer interactions.
+        </p>
+        <a href="#contact" class="btn-primary">Request a Demo</a>
+      </div>
+      <div class="numbers-grid">
+        <div class="number-item">
+          <div class="number-val"><span class="accent">6</span></div>
+          <div class="number-label">Core intelligence functions powering every interaction</div>
+        </div>
+        <div class="number-item">
+          <div class="number-val"><span class="accent">360</span><sup>°</sup></div>
+          <div class="number-label">Full-cycle customer interaction — from receipt to resolution</div>
+        </div>
+        <div class="number-item">
+          <div class="number-val"><span class="accent">∞</span></div>
+          <div class="number-label">Scalable across industries without rearchitecting</div>
+        </div>
+        <div class="number-item">
+          <div class="number-val"><span class="accent">1</span></div>
+          <div class="number-label">Unified AI brain for your entire organization</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL -->
+  <section class="testimonial-section">
+    <div class="testimonial-bg"></div>
+    <div class="testimonial-inner">
+      <span class="quote-mark">"</span>
+      <p class="testimonial-text">
+        DYD is hands-down the best agency we've worked with. They took our product from a rough concept to a polished, revenue-generating platform in under 4 months. They think like founders, not vendors.
+      </p>
+      <div class="testimonial-author">
+        <div class="author-avatar">
+          <img src="https://placehold.co/52x52/7C3AED/ffffff?text=SK" alt="Sarah K." style="width:100%;height:100%;object-fit:cover;">
+        </div>
+        <div>
+          <div class="author-name">Sarah Kim</div>
+          <div class="author-role">CEO, CloudFlow Inc.</div>
+        </div>
+      </div>
+      <div class="clients-logos-row">
+        <span class="client-logo-item">HP Inc.</span>
+        <span class="client-logo-item">Salesforce</span>
+        <span class="client-logo-item">Accenture</span>
+        <span class="client-logo-item">Microsoft</span>
+        <span class="client-logo-item">Stripe</span>
+        <span class="client-logo-item">Figma</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA / CONTACT -->
+  <section class="section" id="contact" style="background:var(--white);">
+    <div class="section-inner" style="text-align:center;max-width:700px;margin:0 auto;">
+      <div class="section-label">Get Started</div>
+      <h2 style="font-family:'Space Grotesk',sans-serif;font-size:clamp(2.2rem,4vw,3.5rem);font-weight:800;letter-spacing:-0.04em;color:var(--text-dark);margin-bottom:1.25rem;line-height:1.1;">
+        Ready to deploy your<br><span style="background:linear-gradient(135deg,var(--violet),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">AI Intelligence Hub?</span>
+      </h2>
+      <p style="font-size:1rem;color:var(--text-mid);line-height:1.75;margin-bottom:2.5rem;">
+        See how DYD Intelligence transforms your customer interactions into structured data, automated workflows, and measurable business outcomes.
+      </p>
+      <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+        <a href="mailto:hello@dyd.com" class="btn-primary" style="font-size:1rem;padding:0.8rem 2rem;">Request a Demo</a>
+        <a href="tel:+1234567890" class="btn-outline" style="font-size:1rem;padding:0.8rem 2rem;">Talk to Our Team</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand"><span>DYD</span> Intelligence</div>
+          <p class="footer-tagline">
+            A modular AI platform that captures, understands, and transforms customer interactions into structured data, actionable insights, and automated business processes.
+          </p>
+        </div>
+        <div>
+          <div class="footer-col-title">Company</div>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Our Work</a></li>
+            <li><a href="#">Careers</a></li>
+            <li><a href="#">Blog</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Platform</div>
+          <ul class="footer-links">
+            <li><a href="#">Multi-Channel Reception</a></li>
+            <li><a href="#">AI Understanding</a></li>
+            <li><a href="#">Workflow Automation</a></li>
+            <li><a href="#">Insights & Analytics</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="mailto:hello@dyd.com">hello@dyd.com</a></li>
+            <li><a href="#">LinkedIn</a></li>
+            <li><a href="#">Twitter / X</a></li>
+            <li><a href="#">Dribbble</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 DYD Intelligence. All rights reserved.</span>
+        <span>Powered by AI. Driven by data.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.style.opacity = '1';
+          e.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.service-card, .number-item, .process-step, .showcase-card, .portfolio-item').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
+      observer.observe(el);
+    });
+
+    // Chat animation loop — restart every ~9s
+    function restartChat() {
+      const msgs = document.querySelectorAll('.chat-msg, .chat-typing');
+      msgs.forEach(el => {
+        el.style.animation = 'none';
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(8px)';
+      });
+      void document.body.offsetHeight; // force reflow
+      msgs.forEach(el => { el.style.animation = ''; });
+    }
+    setInterval(restartChat, 9000);
+
+    // Nav scroll effect
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 20) {
+        nav.style.boxShadow = '0 4px 24px rgba(0,0,0,0.08)';
+      } else {
+        nav.style.boxShadow = 'none';
+      }
+    }, { passive: true });
+  </script>
+</body>
+</html>
