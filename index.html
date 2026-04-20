@@ -1077,12 +1077,101 @@
       animation: msg-in 0.35s cubic-bezier(0.34,1.56,0.64,1) 6.0s forwards;
     }
 
+    /* AI CANVAS ANIMATION */
+    .ai-canvas-wrap {
+      position: relative;
+      width: 480px;
+      height: 480px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    #aiCanvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+    .ai-core {
+      position: relative;
+      z-index: 2;
+      width: 80px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ai-core-ring {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      border: 2px solid rgba(124,58,237,0.5);
+      animation: core-pulse 2.5s ease-in-out infinite;
+    }
+    .ai-core-ring-2 {
+      inset: -14px;
+      border-color: rgba(124,58,237,0.2);
+      animation-delay: 0.8s;
+    }
+    @keyframes core-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.12); opacity: 0.3; }
+    }
+    .ai-core-icon {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--violet), var(--pink));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow:
+        0 0 0 8px rgba(124,58,237,0.12),
+        0 0 40px rgba(124,58,237,0.5),
+        0 0 80px rgba(124,58,237,0.2);
+      position: relative;
+      z-index: 1;
+    }
+    .ai-pill {
+      position: absolute;
+      z-index: 3;
+      background: rgba(13,13,26,0.85);
+      border: 1px solid rgba(124,58,237,0.35);
+      border-radius: 100px;
+      padding: 0.3rem 0.85rem;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      white-space: nowrap;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+    }
+    .ai-pill-1 { top: 8%;  left: 50%; transform: translateX(-50%); animation: pill-float 4s ease-in-out infinite; }
+    .ai-pill-2 { top: 22%; right: 4%; animation: pill-float 4s ease-in-out infinite 0.5s; }
+    .ai-pill-3 { bottom: 22%; right: 4%; animation: pill-float 4s ease-in-out infinite 1s; }
+    .ai-pill-4 { bottom: 8%; left: 50%; transform: translateX(-50%); animation: pill-float 4s ease-in-out infinite 1.5s; }
+    .ai-pill-5 { bottom: 22%; left: 4%; animation: pill-float 4s ease-in-out infinite 2s; }
+    .ai-pill-6 { top: 22%;  left: 4%; animation: pill-float 4s ease-in-out infinite 2.5s; }
+    @keyframes pill-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-6px); }
+    }
+    .ai-pill-1, .ai-pill-4 {
+      animation-name: pill-float-center;
+    }
+    @keyframes pill-float-center {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-6px); }
+    }
+
     /* RESPONSIVE */
     @media (max-width: 1024px) {
       .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
       .hero-visual { justify-content: flex-start; }
       .dark-inner { grid-template-columns: 1fr; }
-      .dark-phones { display: none; }
+      .ai-canvas-wrap { display: none; }
       .numbers-inner { grid-template-columns: 1fr; gap: 3rem; }
       .footer-top { grid-template-columns: 1fr 1fr; }
       .services-grid { grid-template-columns: 1fr 1fr; }
@@ -1243,28 +1332,26 @@
           <a href="#contact" class="btn-primary" style="background:var(--violet);box-shadow:0 4px 20px rgba(124,58,237,0.4);">Request a Demo</a>
         </div>
       </div>
-      <div class="dark-phones">
-        <div class="dark-phone-1">
-          <div class="mini-phone">
-            <div class="mini-screen">
-              <img src="https://placehold.co/200x433/1a1035/7C3AED?text=App+View" alt="app" style="width:100%;height:100%;object-fit:cover;">
-            </div>
+      <div class="ai-canvas-wrap">
+        <canvas id="aiCanvas"></canvas>
+        <!-- centre pulse ring -->
+        <div class="ai-core">
+          <div class="ai-core-ring"></div>
+          <div class="ai-core-ring ai-core-ring-2"></div>
+          <div class="ai-core-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.5">
+              <path d="M12 2a4 4 0 0 1 4 4v1h1a3 3 0 0 1 0 6h-1v1a4 4 0 0 1-8 0v-1H7a3 3 0 0 1 0-6h1V6a4 4 0 0 1 4-4z"/>
+              <circle cx="12" cy="12" r="2" fill="#fff" stroke="none"/>
+            </svg>
           </div>
         </div>
-        <div class="dark-phone-3">
-          <div class="mini-phone" style="background:#0d0d1a;">
-            <div class="mini-screen">
-              <img src="https://placehold.co/220x476/0d0d1a/9F6FFF?text=UI+Design" alt="ui" style="width:100%;height:100%;object-fit:cover;">
-            </div>
-          </div>
-        </div>
-        <div class="dark-phone-2">
-          <div class="mini-phone">
-            <div class="mini-screen">
-              <img src="https://placehold.co/200x433/1a0530/EC4899?text=Mobile+UX" alt="ux" style="width:100%;height:100%;object-fit:cover;">
-            </div>
-          </div>
-        </div>
+        <!-- floating data pills -->
+        <div class="ai-pill ai-pill-1">Channel Input</div>
+        <div class="ai-pill ai-pill-2">NLP Engine</div>
+        <div class="ai-pill ai-pill-3">Automation</div>
+        <div class="ai-pill ai-pill-4">Insights</div>
+        <div class="ai-pill ai-pill-5">Data Capture</div>
+        <div class="ai-pill ai-pill-6">CX Output</div>
       </div>
     </div>
   </section>
@@ -1539,6 +1626,119 @@
       el.style.transition = 'opacity 0.5s ease, transform 0.5s cubic-bezier(0.34,1.56,0.64,1)';
       observer.observe(el);
     });
+
+    // AI Neural Network Canvas
+    (function() {
+      const canvas = document.getElementById('aiCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const W = 480, H = 480;
+      canvas.width = W; canvas.height = H;
+      const CX = W / 2, CY = H / 2;
+
+      // Node definitions — positioned around the centre
+      const nodeAngles = [
+        { angle: -90,  r: 170, label: 'Channel' },
+        { angle: -30,  r: 170, label: 'NLP' },
+        { angle:  30,  r: 170, label: 'Automate' },
+        { angle:  90,  r: 170, label: 'Insights' },
+        { angle: 150,  r: 170, label: 'Data' },
+        { angle: 210,  r: 170, label: 'CX' },
+        { angle: -60,  r: 90,  label: '' },
+        { angle:  60,  r: 90,  label: '' },
+        { angle: 180,  r: 90,  label: '' },
+      ];
+      const nodes = nodeAngles.map(({ angle, r, label }) => ({
+        x: CX + r * Math.cos(angle * Math.PI / 180),
+        y: CY + r * Math.sin(angle * Math.PI / 180),
+        r: label ? 7 : 5,
+        label,
+        outer: r > 100,
+      }));
+
+      // Pulses travelling along edges
+      const edges = [];
+      // outer nodes to centre
+      nodes.slice(0, 6).forEach((n, i) => {
+        edges.push({ from: { x: n.x, y: n.y }, to: { x: CX, y: CY }, t: i / 6, speed: 0.004 + Math.random() * 0.003 });
+      });
+      // inner nodes to centre
+      nodes.slice(6).forEach((n, i) => {
+        edges.push({ from: { x: n.x, y: n.y }, to: { x: CX, y: CY }, t: (i + 0.3) / 3, speed: 0.005 + Math.random() * 0.004 });
+      });
+      // cross-connections between outer nodes
+      [[0,1],[1,2],[2,3],[3,4],[4,5],[5,0],[0,3],[1,4]].forEach(([a,b]) => {
+        edges.push({ from: { x: nodes[a].x, y: nodes[a].y }, to: { x: nodes[b].x, y: nodes[b].y }, t: Math.random(), speed: 0.002 + Math.random() * 0.002 });
+      });
+
+      function drawLine(x1, y1, x2, y2, alpha) {
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.strokeStyle = `rgba(124,58,237,${alpha})`;
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      }
+
+      function drawPulse(edge) {
+        const t = edge.t % 1;
+        const px = edge.from.x + (edge.to.x - edge.from.x) * t;
+        const py = edge.from.y + (edge.to.y - edge.from.y) * t;
+        const grad = ctx.createRadialGradient(px, py, 0, px, py, 6);
+        grad.addColorStop(0, 'rgba(159,111,255,0.95)');
+        grad.addColorStop(0.5, 'rgba(124,58,237,0.4)');
+        grad.addColorStop(1, 'rgba(124,58,237,0)');
+        ctx.beginPath();
+        ctx.arc(px, py, 6, 0, Math.PI * 2);
+        ctx.fillStyle = grad;
+        ctx.fill();
+      }
+
+      let frame = 0;
+      function animate() {
+        ctx.clearRect(0, 0, W, H);
+
+        // draw edges
+        edges.forEach(e => drawLine(e.from.x, e.from.y, e.to.x, e.to.y, 0.12));
+
+        // draw pulses + advance
+        edges.forEach(e => {
+          drawPulse(e);
+          e.t += e.speed;
+          if (e.t > 1) e.t -= 1;
+        });
+
+        // draw nodes
+        nodes.forEach(n => {
+          // glow
+          const g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 3);
+          g.addColorStop(0, n.outer ? 'rgba(159,111,255,0.35)' : 'rgba(236,72,153,0.25)');
+          g.addColorStop(1, 'rgba(0,0,0,0)');
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r * 3, 0, Math.PI * 2);
+          ctx.fillStyle = g;
+          ctx.fill();
+          // dot
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+          ctx.fillStyle = n.outer ? 'rgba(159,111,255,0.9)' : 'rgba(236,72,153,0.8)';
+          ctx.fill();
+        });
+
+        // centre glow
+        const cg = ctx.createRadialGradient(CX, CY, 0, CX, CY, 60);
+        cg.addColorStop(0, 'rgba(124,58,237,0.25)');
+        cg.addColorStop(1, 'rgba(124,58,237,0)');
+        ctx.beginPath();
+        ctx.arc(CX, CY, 60, 0, Math.PI * 2);
+        ctx.fillStyle = cg;
+        ctx.fill();
+
+        frame++;
+        requestAnimationFrame(animate);
+      }
+      animate();
+    })();
 
     // Chat animation loop — restart every ~9s
     function restartChat() {
