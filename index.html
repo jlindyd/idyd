@@ -684,91 +684,147 @@
       line-height: 1.5;
     }
 
-    /* TESTIMONIAL */
-    .testimonial-section {
-      background: var(--dark-2);
+    /* INDUSTRY CARDS */
+    .industry-section {
+      background: var(--white);
       padding: 7rem 2rem;
-      position: relative;
-      overflow: hidden;
     }
-    .testimonial-bg {
+    .industry-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.5rem;
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .industry-card {
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--gray-light);
+      border: 1px solid var(--gray-mid);
+      transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1), box-shadow 0.3s ease;
+    }
+    .industry-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 48px rgba(0,0,0,0.12), 0 6px 16px rgba(0,0,0,0.06);
+    }
+    .industry-card-visual {
+      position: relative;
+      height: 220px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .industry-icon-wrap {
+      position: relative;
+      z-index: 2;
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      border: 1px solid;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+    }
+    .industry-glow {
       position: absolute;
       inset: 0;
       pointer-events: none;
-      background: radial-gradient(ellipse 700px 500px at 50% 50%, rgba(124,58,237,0.1) 0%, transparent 70%);
     }
-    .testimonial-inner {
-      max-width: 900px;
-      margin: 0 auto;
-      text-align: center;
-      position: relative;
-      z-index: 1;
+    .industry-grid-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
     }
-    .quote-mark {
-      font-size: 6rem;
-      line-height: 0.6;
-      color: var(--violet);
-      font-family: Georgia, serif;
-      margin-bottom: 2rem;
-      display: block;
-      opacity: 0.6;
+    .industry-viz {
+      position: absolute;
+      bottom: 16px;
+      right: 16px;
+      z-index: 2;
     }
-    .testimonial-text {
-      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
-      font-family: 'Space Grotesk', sans-serif;
-      font-weight: 500;
-      color: rgba(255,255,255,0.9);
-      line-height: 1.6;
-      letter-spacing: -0.02em;
-      margin-bottom: 2.5rem;
+    .industry-card-body {
+      padding: 1.5rem;
+      background: #fff;
     }
-    .testimonial-author {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      justify-content: center;
-    }
-    .author-avatar {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--violet), var(--pink));
-      overflow: hidden;
-      flex-shrink: 0;
-      border: 2px solid rgba(124,58,237,0.4);
-    }
-    .author-name {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: 1rem;
+    .industry-tag {
+      display: inline-block;
+      font-size: 0.72rem;
       font-weight: 600;
-      color: #fff;
-      text-align: left;
-    }
-    .author-role {
-      font-size: 0.8rem;
-      color: rgba(255,255,255,0.4);
-      text-align: left;
-    }
-
-    /* CLIENTS LOGOS (bottom of testimonial) */
-    .clients-logos-row {
-      display: flex;
-      gap: 2.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: 4rem;
-      padding-top: 3rem;
-      border-top: 1px solid rgba(255,255,255,0.07);
-    }
-    .client-logo-item {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      color: rgba(255,255,255,0.2);
-      letter-spacing: -0.02em;
-      transition: color 0.2s ease;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      border: 1px solid;
+      margin-bottom: 0.75rem;
     }
-    .client-logo-item:hover { color: rgba(255,255,255,0.5); }
+    .industry-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 0.6rem;
+      line-height: 1.3;
+    }
+    .industry-desc {
+      font-size: 0.875rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 1rem;
+    }
+    .industry-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .ind-chip {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--text-mid);
+      background: var(--gray-light);
+      border: 1px solid var(--gray-mid);
+      padding: 0.25rem 0.65rem;
+      border-radius: 100px;
+    }
+    .iviz-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 48px;
+    }
+    .iviz-bar {
+      width: 10px;
+      border-radius: 3px 3px 0 0;
+      opacity: 0.85;
+    }
+    .iviz-sparkline-wrap {
+      width: 120px;
+      height: 48px;
+    }
+    .iviz-stat-box {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      padding: 8px 12px;
+      min-width: 80px;
+    }
+    .iviz-stat-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1;
+    }
+    .iviz-stat-label {
+      font-size: 0.65rem;
+      color: rgba(255,255,255,0.45);
+      margin-top: 3px;
+      white-space: nowrap;
+    }
 
     /* FOOTER */
     footer {
@@ -1411,45 +1467,171 @@
         </div>
         <a href="#contact" class="btn-primary">See It in Action</a>
       </div>
-      <div class="portfolio-grid">
-        <div class="portfolio-item portfolio-item-tall">
-          <img src="https://placehold.co/600x760/0f0c29/7C3AED?text=Retail+%26+Commerce" alt="Retail & Commerce" class="portfolio-img" style="min-height:400px;">
-          <div class="portfolio-info">
-            <div class="portfolio-title">Retail & E-Commerce</div>
-            <div class="portfolio-cat">Customer Engagement · Order Automation · CX</div>
-          </div>
-          <div class="portfolio-overlay">
-            <div class="portfolio-overlay-icon">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      <div class="industry-grid">
+
+        <!-- Card 1: Retail -->
+        <div class="industry-card">
+          <div class="industry-card-visual" style="background:linear-gradient(145deg,#1a0a2e 0%,#2d1060 50%,#0f0820 100%);">
+            <div class="industry-icon-wrap" style="background:rgba(124,58,237,0.15);border-color:rgba(124,58,237,0.3);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9F6FFF" stroke-width="1.5"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
             </div>
-          </div>
-        </div>
-        <div style="display:flex;flex-direction:column;gap:1rem;">
-          <div class="portfolio-item">
-            <img src="https://placehold.co/580x360/032940/06B6D4?text=Financial+Services" alt="Financial Services" class="portfolio-img" style="min-height:220px;">
-            <div class="portfolio-info">
-              <div class="portfolio-title">Financial Services</div>
-              <div class="portfolio-cat">Lead Conversion · Client Intelligence · Compliance</div>
-            </div>
-            <div class="portfolio-overlay">
-              <div class="portfolio-overlay-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            <div class="industry-glow" style="background:radial-gradient(circle at 50% 60%,rgba(124,58,237,0.3) 0%,transparent 65%);"></div>
+            <div class="industry-grid-lines"></div>
+            <!-- mini data viz -->
+            <div class="industry-viz">
+              <div class="iviz-bar-row">
+                <div class="iviz-label">Orders</div>
+                <div class="iviz-bar"><div class="iviz-fill" style="width:82%;background:linear-gradient(90deg,#7C3AED,#9F6FFF);"></div></div>
+                <div class="iviz-val">82%</div>
+              </div>
+              <div class="iviz-bar-row">
+                <div class="iviz-label">Resolved</div>
+                <div class="iviz-bar"><div class="iviz-fill" style="width:94%;background:linear-gradient(90deg,#10B981,#34D399);"></div></div>
+                <div class="iviz-val">94%</div>
+              </div>
+              <div class="iviz-bar-row">
+                <div class="iviz-label">CSAT</div>
+                <div class="iviz-bar"><div class="iviz-fill" style="width:76%;background:linear-gradient(90deg,#EC4899,#F472B6);"></div></div>
+                <div class="iviz-val">4.8★</div>
               </div>
             </div>
           </div>
-          <div class="portfolio-item">
-            <img src="https://placehold.co/580x360/1a0d3d/EC4899?text=Healthcare" alt="Healthcare" class="portfolio-img" style="min-height:220px;">
-            <div class="portfolio-info">
-              <div class="portfolio-title">Healthcare</div>
-              <div class="portfolio-cat">Patient Communication · Scheduling · Data Capture</div>
-            </div>
-            <div class="portfolio-overlay">
-              <div class="portfolio-overlay-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </div>
+          <div class="industry-card-body">
+            <div class="industry-tag" style="color:#9F6FFF;background:rgba(124,58,237,0.08);border-color:rgba(124,58,237,0.2);">Retail & E-Commerce</div>
+            <h3 class="industry-title">Smarter customer journeys at scale</h3>
+            <p class="industry-desc">Automate order tracking, returns, and support — across every channel — while capturing structured interaction data in real time.</p>
+            <div class="industry-chips">
+              <span class="ind-chip">Order Automation</span>
+              <span class="ind-chip">Live Chat AI</span>
+              <span class="ind-chip">CX Analytics</span>
             </div>
           </div>
         </div>
+
+        <!-- Card 2: Financial Services -->
+        <div class="industry-card">
+          <div class="industry-card-visual" style="background:linear-gradient(145deg,#031a2e 0%,#064e6e 50%,#021520 100%);">
+            <div class="industry-icon-wrap" style="background:rgba(6,182,212,0.12);border-color:rgba(6,182,212,0.3);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#67e8f9" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>
+            </div>
+            <div class="industry-glow" style="background:radial-gradient(circle at 50% 60%,rgba(6,182,212,0.25) 0%,transparent 65%);"></div>
+            <div class="industry-grid-lines"></div>
+            <div class="industry-viz">
+              <div class="iviz-stat-row">
+                <div class="iviz-stat-box">
+                  <div class="iviz-stat-val" style="color:#67e8f9;">+38%</div>
+                  <div class="iviz-stat-label">Lead Conv.</div>
+                </div>
+                <div class="iviz-stat-box">
+                  <div class="iviz-stat-val" style="color:#34D399;">2.1×</div>
+                  <div class="iviz-stat-label">Pipeline</div>
+                </div>
+                <div class="iviz-stat-box">
+                  <div class="iviz-stat-val" style="color:#F472B6;">99%</div>
+                  <div class="iviz-stat-label">Compliant</div>
+                </div>
+              </div>
+              <div class="iviz-sparkline">
+                <svg viewBox="0 0 120 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:36px;">
+                  <polyline points="0,30 20,22 40,25 60,14 80,18 100,8 120,4" stroke="rgba(6,182,212,0.7)" stroke-width="2" fill="none"/>
+                  <polyline points="0,30 20,22 40,25 60,14 80,18 100,8 120,4 120,36 0,36" fill="rgba(6,182,212,0.08)"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="industry-card-body">
+            <div class="industry-tag" style="color:#67e8f9;background:rgba(6,182,212,0.08);border-color:rgba(6,182,212,0.2);">Financial Services</div>
+            <h3 class="industry-title">Turn conversations into conversions</h3>
+            <p class="industry-desc">Qualify leads, answer compliance-sensitive queries, and capture structured client data — automatically and at scale.</p>
+            <div class="industry-chips">
+              <span class="ind-chip">Lead Scoring</span>
+              <span class="ind-chip">Compliance AI</span>
+              <span class="ind-chip">Client Intel</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Healthcare -->
+        <div class="industry-card">
+          <div class="industry-card-visual" style="background:linear-gradient(145deg,#0d1f1a 0%,#0a3d2e 50%,#071510 100%);">
+            <div class="industry-icon-wrap" style="background:rgba(16,185,129,0.12);border-color:rgba(16,185,129,0.3);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="1.5"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <div class="industry-glow" style="background:radial-gradient(circle at 50% 60%,rgba(16,185,129,0.25) 0%,transparent 65%);"></div>
+            <div class="industry-grid-lines"></div>
+            <div class="industry-viz">
+              <div class="iviz-bar-row">
+                <div class="iviz-label">Appointments</div>
+                <div class="iviz-bar"><div class="iviz-fill" style="width:88%;background:linear-gradient(90deg,#10B981,#34D399);"></div></div>
+                <div class="iviz-val">88%</div>
+              </div>
+              <div class="iviz-bar-row">
+                <div class="iviz-label">No-shows</div>
+                <div class="iviz-bar"><div class="iviz-fill" style="width:18%;background:linear-gradient(90deg,#EF4444,#F87171);"></div></div>
+                <div class="iviz-val">↓18%</div>
+              </div>
+              <div class="iviz-bar-row">
+                <div class="iviz-label">Data Captured</div>
+                <div class="iviz-bar"><div class="iviz-fill" style="width:96%;background:linear-gradient(90deg,#06B6D4,#67e8f9);"></div></div>
+                <div class="iviz-val">96%</div>
+              </div>
+            </div>
+          </div>
+          <div class="industry-card-body">
+            <div class="industry-tag" style="color:#34D399;background:rgba(16,185,129,0.08);border-color:rgba(16,185,129,0.2);">Healthcare</div>
+            <h3 class="industry-title">Intelligent patient engagement</h3>
+            <p class="industry-desc">Automate appointment scheduling, reminders, and triage — while capturing structured patient data across every touchpoint.</p>
+            <div class="industry-chips">
+              <span class="ind-chip">Scheduling AI</span>
+              <span class="ind-chip">Patient Comms</span>
+              <span class="ind-chip">Data Capture</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Professional Services -->
+        <div class="industry-card">
+          <div class="industry-card-visual" style="background:linear-gradient(145deg,#1a0c20 0%,#3d1560 50%,#120820 100%);">
+            <div class="industry-icon-wrap" style="background:rgba(236,72,153,0.12);border-color:rgba(236,72,153,0.3);">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#F472B6" stroke-width="1.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+            </div>
+            <div class="industry-glow" style="background:radial-gradient(circle at 50% 60%,rgba(236,72,153,0.25) 0%,transparent 65%);"></div>
+            <div class="industry-grid-lines"></div>
+            <div class="industry-viz">
+              <div class="iviz-stat-row">
+                <div class="iviz-stat-box">
+                  <div class="iviz-stat-val" style="color:#F472B6;">60%</div>
+                  <div class="iviz-stat-label">Less Admin</div>
+                </div>
+                <div class="iviz-stat-box">
+                  <div class="iviz-stat-val" style="color:#C084FC;">3×</div>
+                  <div class="iviz-stat-label">Faster Intake</div>
+                </div>
+                <div class="iviz-stat-box">
+                  <div class="iviz-stat-val" style="color:#34D399;">24/7</div>
+                  <div class="iviz-stat-label">Availability</div>
+                </div>
+              </div>
+              <div class="iviz-sparkline">
+                <svg viewBox="0 0 120 36" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:36px;">
+                  <polyline points="0,32 20,26 40,20 60,22 80,12 100,8 120,4" stroke="rgba(236,72,153,0.7)" stroke-width="2" fill="none"/>
+                  <polyline points="0,32 20,26 40,20 60,22 80,12 100,8 120,4 120,36 0,36" fill="rgba(236,72,153,0.08)"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+          <div class="industry-card-body">
+            <div class="industry-tag" style="color:#F472B6;background:rgba(236,72,153,0.08);border-color:rgba(236,72,153,0.2);">Professional Services</div>
+            <h3 class="industry-title">Automate intake, focus on delivery</h3>
+            <p class="industry-desc">Handle client inquiries, onboarding workflows, and project updates automatically — freeing your team to do high-value work.</p>
+            <div class="industry-chips">
+              <span class="ind-chip">Client Intake</span>
+              <span class="ind-chip">Workflow AI</span>
+              <span class="ind-chip">24/7 Support</span>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1514,34 +1696,6 @@
           <div class="number-val"><span class="accent">1</span></div>
           <div class="number-label">Unified AI brain for your entire organization</div>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TESTIMONIAL -->
-  <section class="testimonial-section">
-    <div class="testimonial-bg"></div>
-    <div class="testimonial-inner">
-      <span class="quote-mark">"</span>
-      <p class="testimonial-text">
-        DYD is hands-down the best agency we've worked with. They took our product from a rough concept to a polished, revenue-generating platform in under 4 months. They think like founders, not vendors.
-      </p>
-      <div class="testimonial-author">
-        <div class="author-avatar">
-          <img src="https://placehold.co/52x52/7C3AED/ffffff?text=SK" alt="Sarah K." style="width:100%;height:100%;object-fit:cover;">
-        </div>
-        <div>
-          <div class="author-name">Sarah Kim</div>
-          <div class="author-role">CEO, CloudFlow Inc.</div>
-        </div>
-      </div>
-      <div class="clients-logos-row">
-        <span class="client-logo-item">HP Inc.</span>
-        <span class="client-logo-item">Salesforce</span>
-        <span class="client-logo-item">Accenture</span>
-        <span class="client-logo-item">Microsoft</span>
-        <span class="client-logo-item">Stripe</span>
-        <span class="client-logo-item">Figma</span>
       </div>
     </div>
   </section>
